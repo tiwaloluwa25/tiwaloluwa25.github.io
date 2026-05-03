@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiwaloluwa Ogunoye – Data Analyst Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f2ec;
+    --cream: #ede9e0;
+    --accent: #1a6b4a;
+    --accent-light: #e8f2ed;
+    --amber: #c97d2e;
+    --amber-light: #fdf3e4;
+    --muted: #6b6560;
+    --border: #d4cfc7;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: .6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(245, 242, 236, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 6rem 3rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 0.85rem 2rem;
+    border-radius: 2px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: #145539;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(26, 107, 74, 0.3);
+  }
+
+  .btn-secondary {
+    border: 1px solid var(--border);
+    color: var(--ink);
+    padding: 0.85rem 2rem;
+    border-radius: 2px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+    background: transparent;
+  }
+
+  .btn-secondary:hover {
+    background: var(--cream);
+    border-color: var(--ink);
+  }
+
+  .hero-right {
+    position: relative;
+    background: var(--cream);
+    border-left: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Stats grid in hero right */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    width: 100%;
+    height: 100%;
+  }
+
+  .stat-cell {
+    background: var(--cream);
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .stat-cell:hover { background: var(--accent-light); }
+
+  .stat-bg-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 9rem;
+    color: var(--border);
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    line-height: 1;
+    pointer-events: none;
+    transition: color 0.3s;
+  }
+
+  .stat-cell:hover .stat-bg-num { color: rgba(26, 107, 74, 0.1); }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+  }
+
+  /* Animated line */
+  .hero-line {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--amber), var(--accent));
+    background-size: 200% 100%;
+    animation: shimmer 4s ease infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* ── SECTION COMMON ── */
+  section {
+    padding: 6rem 3rem;
+    position: relative;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  /* ── SKILLS SECTION ── */
+  .skills-section {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .skills-section h2 { color: var(--paper); }
+  .skills-section .section-num { color: var(--amber); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .skill-group {
+    background: var(--ink);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .skill-group:hover { background: #161616; }
+
+  .skill-group-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1.5rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(245, 242, 236, 0.8);
+    padding: 0.35rem 0.85rem;
+    border-radius: 1px;
+    font-size: 0.82rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover {
+    background: rgba(26, 107, 74, 0.25);
+    border-color: var(--accent);
+    color: var(--paper);
+  }
+
+  /* ── PROJECTS SECTION ── */
+  .projects-grid {
+    display: grid;
+    gap: 2px;
+    background: var(--border);
+  }
+
+  .project-card {
+    background: var(--paper);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    transition: background 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .project-card:hover { background: var(--white); }
+
+  .project-meta {
+    padding: 3rem 2.5rem;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .project-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .project-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: auto;
+  }
+
+  .tool-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 1px;
+    color: var(--muted);
+  }
+
+  .project-card:hover .tool-badge {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .project-body {
+    padding: 3rem;
+  }
+
+  .project-overview {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    line-height: 1.75;
+  }
+
+  .project-insights {
+    margin-bottom: 2rem;
+  }
+
+  .project-insights-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .insight-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .insight-list li {
+    font-size: 0.9rem;
+    padding-left: 1.25rem;
+    position: relative;
+    color: var(--ink);
+  }
+
+  .insight-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+
+  .project-impact {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem;
+    font-size: 0.88rem;
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* Churn card highlight */
+  .project-card.featured {
+    border-top: 3px solid var(--accent);
+  }
+
+  /* ── ABOUT SECTION ── */
+  .about-section {
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-left h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .about-tagline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .about-cta-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-row:hover { color: var(--accent); }
+
+  .contact-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    background: var(--paper);
+    flex-shrink: 0;
+  }
+
+  .about-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .about-block {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-block:last-child { border-bottom: none; }
+
+  .about-block-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.75rem;
+  }
+
+  .about-block p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-top: 3px solid var(--accent);
+  }
+
+  .footer-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--paper);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245, 242, 236, 0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--amber); }
+
+  .footer-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(245, 242, 236, 0.35);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 7rem 1.5rem 3rem; }
+    .hero-right { height: 280px; border-left: none; border-top: 1px solid var(--border); }
+
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .stat-cell { padding: 1.5rem; }
+    .stat-bg-num { font-size: 5rem; }
+
+    section { padding: 4rem 1.5rem; }
+
+    .project-card { grid-template-columns: 1fr; }
+    .project-meta { border-right: none; border-bottom: 1px solid var(--border); padding: 2rem 1.5rem; }
+    .project-body { padding: 2rem 1.5rem; }
+
+    .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+
+    footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">T. Ogunoye</a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="mailto:Tiwaaloluwaogunoye@gmail.com">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Data Analyst</p>
+    <h1>Turning data<br>into <em>decisions</em></h1>
+    <p class="hero-desc">I'm Tiwaloluwa Ogunoye — a data analyst skilled in SQL, Power BI, Excel, and data visualization. I transform raw data into insights that drive business action.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="mailto:Tiwaaloluwaogunoye@gmail.com" class="btn-secondary">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stats">
+      <div class="stat-cell">
+        <span class="stat-bg-num">2</span>
+        <p class="stat-label">Projects Built</p>
+        <p class="stat-value">2</p>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-bg-num">4</span>
+        <p class="stat-label">Core Tools</p>
+        <p class="stat-value">SQL · BI · Excel</p>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-bg-num">26</span>
+        <p class="stat-label">Churn Rate Found</p>
+        <p class="stat-value">26.5%</p>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-bg-num">0</span>
+        <p class="stat-label">Seeking</p>
+        <p class="stat-value">Remote Roles</p>
+      </div>
+    </div>
+    <div class="hero-line"></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>Skills & Tools</h2>
+  </div>
+  <div class="skills-grid fade-in">
+    <div class="skill-group">
+      <p class="skill-group-title">Query & Data</p>
+      <div class="skill-tags">
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">JOINs</span>
+        <span class="skill-tag">GROUP BY</span>
+        <span class="skill-tag">Subqueries</span>
+        <span class="skill-tag">HAVING</span>
+        <span class="skill-tag">Power Query</span>
+        <span class="skill-tag">Pandas</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">Visualisation</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">DAX</span>
+        <span class="skill-tag">Looker Studio</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">Dashboard Design</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">Spreadsheets & Analysis</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Excel</span>
+        <span class="skill-tag">PivotTables</span>
+        <span class="skill-tag">VLOOKUP</span>
+        <span class="skill-tag">Data Cleaning</span>
+        <span class="skill-tag">KPI Tracking</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">Core Competencies</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Business Insights</span>
+        <span class="skill-tag">Storytelling</span>
+        <span class="skill-tag">Trend Analysis</span>
+        <span class="skill-tag">Reporting</span>
+        <span class="skill-tag">Segmentation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="padding-top: 6rem; padding-bottom: 0;">
+  <div class="section-header fade-in">
+    <span class="section-num">02</span>
+    <h2>Portfolio Projects</h2>
+  </div>
+</section>
+
+<div class="projects-grid">
+
+  <!-- PROJECT 1 -->
+  <div class="project-card featured fade-in">
+    <div class="project-meta">
+      <span class="project-number">Project 01 · 2026</span>
+      <h3 class="project-title">Customer Churn Analysis Dashboard</h3>
+      <div class="project-tools">
+        <span class="tool-badge">Power BI</span>
+        <span class="tool-badge">SQL</span>
+        <span class="tool-badge">Power Query</span>
+        <span class="tool-badge">DAX</span>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="project-overview">Analyzed customer churn behavior and its revenue impact to identify high-risk segments and support retention strategy decisions.</p>
+      <div class="project-insights">
+        <p class="project-insights-title">Key Findings</p>
+        <ul class="insight-list">
+          <li>Churn rate identified at <strong>26.5%</strong> across the customer base</li>
+          <li>Month-to-month contracts carried the highest churn risk</li>
+          <li>Customers within <strong>0–12 months tenure</strong> showed peak churn likelihood</li>
+          <li>Certain payment methods correlated strongly with churn behavior</li>
+        </ul>
+      </div>
+      <div class="project-impact">
+        Provided actionable insights to support customer retention strategies and reduce revenue exposure from high-risk segments.
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT 2 -->
+  <div class="project-card fade-in">
+    <div class="project-meta">
+      <span class="project-number">Project 02 · 2026</span>
+      <h3 class="project-title">Hospital Performance Dashboard</h3>
+      <div class="project-tools">
+        <span class="tool-badge">Looker Studio</span>
+        <span class="tool-badge">Excel</span>
+        <span class="tool-badge">SQL</span>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="project-overview">Evaluated hospital cost efficiency and patient satisfaction across departments to surface operational gaps and inform staffing decisions.</p>
+      <div class="project-insights">
+        <p class="project-insights-title">Key Findings</p>
+        <ul class="insight-list">
+          <li>Neurology identified as highest-cost department at <strong>$138K</strong></li>
+          <li>Patient satisfaction scored <strong>3.07 vs. a 4.0 target</strong> — a significant gap</li>
+          <li>Scheduling inefficiencies flagged across multiple appointment datasets</li>
+        </ul>
+      </div>
+      <div class="project-impact">
+        Recommended improvements in staffing allocation and patient feedback tracking to improve operational efficiency.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="about-left fade-in">
+      <div class="section-header" style="margin-bottom: 1.5rem;">
+        <span class="section-num">03</span>
+        <h2>About Me</h2>
+      </div>
+      <p class="about-tagline">"Transforming raw data into decisions that actually move the business forward."</p>
+      <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.8;">I began my data analytics journey in January 2026 and have been building hands-on experience through real-world projects ever since. I am actively seeking remote or international Data Analyst / Business Analyst opportunities.</p>
+      <div class="about-cta-group">
+        <a href="mailto:Tiwaaloluwaogunoye@gmail.com" class="contact-row">
+          <span class="contact-icon">✉</span>
+          Tiwaaloluwaogunoye@gmail.com
+        </a>
+        <a href="https://linkedin.com" class="contact-row">
+          <span class="contact-icon">in</span>
+          LinkedIn Profile
+        </a>
+      </div>
+    </div>
+    <div class="about-right fade-in">
+      <div class="about-block">
+        <p class="about-block-title">What I Do</p>
+        <p>I specialize in data cleaning and transformation, building interactive dashboards, identifying business trends and inefficiencies, and translating complex data into clear insights for non-technical stakeholders.</p>
+      </div>
+      <div class="about-block">
+        <p class="about-block-title">How I Work</p>
+        <p>I enjoy working with real-world datasets to solve business problems. My approach combines rigorous SQL querying and data preparation with clear, purposeful visualization that puts the insight — not the chart — first.</p>
+      </div>
+      <div class="about-block">
+        <p class="about-block-title">Currently Seeking</p>
+        <p>Remote or international roles in Data Analytics or Business Analytics where I can apply SQL, Power BI, and Excel skills to real organizational challenges and continue growing rapidly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">Tiwaloluwa Ogunoye</span>
+  <div class="footer-links">
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="mailto:Tiwaaloluwaogunoye@gmail.com">Email</a>
+    <a href="https://linkedin.com">LinkedIn</a>
+  </div>
+  <span class="footer-note">Data Analyst · 2026</span>
+</footer>
+
+<script>
+  // Scroll-triggered fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
